@@ -20,28 +20,32 @@
     var CONFIG = {"hostname":"na0hblog.top","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
+  <meta name="description" content="-–title: ‘ctfshow web爆破’date: 2021-11-09 12:00:00author: 土土backup: &#x2F;img&#x2F;atimg&#x2F;13.jpgtags:- 学习笔记categories:- 学习笔记excerpt: 坚持description: 努力 -–">
+<meta property="og:type" content="article">
 <meta property="og:title" content="佩斯利小姐House">
-<meta property="og:url" content="http://na0hblog.top/index.html">
+<meta property="og:url" content="http://na0hblog.top/2021/11/09/ctfshow%E7%88%86%E7%A0%B4/index.html">
 <meta property="og:site_name" content="佩斯利小姐House">
+<meta property="og:description" content="-–title: ‘ctfshow web爆破’date: 2021-11-09 12:00:00author: 土土backup: &#x2F;img&#x2F;atimg&#x2F;13.jpgtags:- 学习笔记categories:- 学习笔记excerpt: 坚持description: 努力 -–">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-09T04:13:30.691Z">
+<meta property="article:modified_time" content="2021-11-09T04:13:30.691Z">
 <meta property="article:author" content="lbj">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://na0hblog.top/">
+<link rel="canonical" href="http://na0hblog.top/2021/11/09/ctfshow%E7%88%86%E7%A0%B4/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>佩斯利小姐House</title>
+  <title> | 佩斯利小姐House</title>
   
 
 
@@ -139,9 +143,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -157,10 +162,9 @@
       <meta itemprop="name" content="佩斯利小姐House">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
+        <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2021/11/09/ctfshow%E7%88%86%E7%A0%B4/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -183,251 +187,50 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>-–<br>title: ‘ctfshow web爆破’<br>date: 2021-11-09 12:00:00<br>author: 土土<br>backup: /img/atimg/13.jpg<br>tags:<br>- 学习笔记<br>categories:<br>- 学习笔记<br>excerpt: 坚持<br>description: 努力</p>
+        <p>-–<br>title: ‘ctfshow web爆破’<br>date: 2021-11-09 12:00:00<br>author: 土土<br>backup: /img/atimg/13.jpg<br>tags:<br>- 学习笔记<br>categories:<br>- 学习笔记<br>excerpt: 坚持<br>description: 努力</p>
 <p>-–</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/11/09/ctfshow%E7%88%86%E7%A0%B4/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
+<span id="more"></span>
+
+<p>#沛宝小屋</p>
+<p>*web21<br>打开代理抓包 输入账号密码 抓包发现author。。 base64之后发现是 刚输入的账号密码 格式为 admin: xxxx  就自定义爆破 1:猜为admin 2:: 3:网站给的zip密码 加上base64encode 取消 payload encoding<br>*web22<br>搜索子域名 发现 flag.ctf.show 有flag<br>*web23<br>用php写脚本<br><?php
+for($i=0;$i<10000;$i++)
+{
+    $token=md5($i);
+     if(substr($token, 1,1)===substr($token, 14,1) && substr($token, 14,1) ===substr($token, 17,1)){
+        if((intval(substr($token, 1,1))+intval(substr($token, 14,1))+substr($token, 17,1))/substr($token, 1,1)===intval(substr($token, 31,1)))
+        {
+             echo 'token = ' .$i. ' md5=' .$token;
+         }
+     }
+}  发现token=422  然后构造 /?token=422
+*web24
+利用了伪随机数的特性  种子确定时 伪随机数是确定 的 构建脚本 
+<?php mt_strand(372619038); echo intval(mt_rand()); ?>  得到 r 且构造?r=1155388967<br>*web 25<br>这题弄工具要了好久 将php_mt_seed-4.0 放进虚拟机 然后 make<br>看代码 先输入一个?r=0得第一个随机数 比如 783828883 然后运用指令time. /php_mt_seed 783828883 我们要php7版本的3660515917这个随机数 然后 写php脚本<br> &lt;?php<br>mt_srand(3660515917);<br>mt_rand();<br>echo mt_rand()+mt_rand();<br>出随机数和 然后构造 get:?r=第一个随机数 cookie token=随机数和<br>*web26  把给的信息都填上 但是密码是错的 抓包 爆破密码 用 web21<br>给的zip字典<br>*web27 这题挺简单也挺有意思的 给了录取，名单和教务系统给你  你只需要用bp爆破出身份证号中间生日六位即可 登录获得flag payload dates datefrom1980 到2000 format为 yyyyMMdd<br>*web 28<br>看网址的0和1  选custom 1和2都load1到100字典 即可<br>记得把2.txt删掉 改成index.php不然爆不出来的</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://na0hblog.top/2021/09/29/%E5%85%A5%E9%97%A8%E5%89%8D20%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lbj">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="佩斯利小姐House">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/29/%E5%85%A5%E9%97%A8%E5%89%8D20%E9%A2%98/" class="post-title-link" itemprop="url">ctfshow web入门前二十题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-29 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-29T00:00:00+08:00">2021-09-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-30 00:39:50" itemprop="dateModified" datetime="2021-09-30T00:39:50+08:00">2021-09-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>努力</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/09/29/%E5%85%A5%E9%97%A8%E5%89%8D20%E9%A2%98/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/29/%E5%85%A5%E9%97%A8%E5%89%8D20%E9%A2%98/" rel="prev" title="ctfshow web入门前二十题">
+      <i class="fa fa-chevron-left"></i> ctfshow web入门前二十题
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://na0hblog.top/2021/09/28/%E6%B0%B4%E5%93%A5%E5%82%BB%E9%80%BC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lbj">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="佩斯利小姐House">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/28/%E6%B0%B4%E5%93%A5%E5%82%BB%E9%80%BC/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-28 17:28:56" itemprop="dateCreated datePublished" datetime="2021-09-28T17:28:56+08:00">2021-09-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-29 21:09:41" itemprop="dateModified" datetime="2021-09-29T21:09:41+08:00">2021-09-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>-–<br>title: ‘水哥是傻逼’<br>date: 2021-09-28 10:47:28<br>author: 小李小罗小韦<br>backup: /img/atimg/13.jpg<br>tags:<br>- 学习笔记<br>categories:<br>- 学习笔记<br>excerpt: 坚持<br>description: 努力</p>
-<p>-–</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/09/28/%E6%B0%B4%E5%93%A5%E5%82%BB%E9%80%BC/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://na0hblog.top/2021/09/28/%E2%80%98%E6%B2%9B%E5%AE%9D%E5%B0%8F%E5%B1%8B%E2%80%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lbj">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="佩斯利小姐House">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/28/%E2%80%98%E6%B2%9B%E5%AE%9D%E5%B0%8F%E5%B1%8B%E2%80%99/" class="post-title-link" itemprop="url">‘沛宝小屋’</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-09-28 13:03:50" itemprop="dateCreated datePublished" datetime="2021-09-28T13:03:50+08:00">2021-09-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-09-29 20:57:52" itemprop="dateModified" datetime="2021-09-29T20:57:52+08:00">2021-09-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>#沛宝小屋</p>
-<p>##<strong>想沛沛的第七天</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
